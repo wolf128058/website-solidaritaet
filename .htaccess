@@ -42,6 +42,7 @@ RewriteRule ^(.*)$ https://www.xn--solidaritt-am-ort-yqb.de/$1 [R=301,L]
  ExpiresByType image/x-icon "access plus 1 month"
  ExpiresByType application/x-font-woff "access plus 1 month"
 </IfModule>
+
 <ifmodule mod_headers.c>
  <filesmatch "\\.(ico|jpe?g|png|gif|swf)$">
   Header set Cache-Control "max-age=2592000, public"
@@ -49,6 +50,12 @@ RewriteRule ^(.*)$ https://www.xn--solidaritt-am-ort-yqb.de/$1 [R=301,L]
  <filesmatch "\\.(css|js|woff)$">
   Header set Cache-Control "max-age=604800, public"
  </filesmatch>
+  	Header set X-XSS-Protection "1; mode=block"
+  	Header always append X-Frame-Options SAMEORIGIN
+  	Header set X-Content-Type-Options nosniff
+  	Header set Strict-Transport-Security: "max-age=15552001" env=HTTPS
+    Header set Referrer-Policy: same-origin
+    Header set Feature-Policy: "camera 'none'; microphone 'none'; geolocation 'none'; speaker 'self'; fullscreen *"
 </ifmodule>
 
 # Prevent .ht* files from being sent to outside requests
